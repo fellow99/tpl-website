@@ -267,7 +267,7 @@ button {
   transform: scale(0.95);
 }
 
-/* 亮色主题显示月亮（点击切暗），暗色主题显示太阳（点击切亮） */
+/* 图标展示「当前主题」：亮色显示太阳、暗色显示月亮；按钮 aria-label 表示点击后的动作 */
 .icon-moon { display: none; }
 html[data-theme="dark"] .icon-sun { display: none; }
 html[data-theme="dark"] .icon-moon { display: block; }
@@ -314,7 +314,8 @@ html[data-theme="dark"] .icon-moon { display: block; }
 
 .btn-accent {
   background: var(--color-accent);
-  color: #fff;
+  /* 金底用墨色文字，保证 WCAG AA 对比度（白字在金底上仅约 2.4:1） */
+  color: var(--color-text);
   border-radius: var(--radius-pill);
 }
 
@@ -476,12 +477,6 @@ html[data-theme="dark"] .icon-moon { display: block; }
 .d-service {
   fill: color-mix(in srgb, var(--color-accent) 14%, transparent);
   stroke: var(--color-accent);
-  stroke-width: 1.5;
-}
-
-.d-data {
-  fill: color-mix(in srgb, var(--color-success) 12%, transparent);
-  stroke: var(--color-success);
   stroke-width: 1.5;
 }
 
@@ -877,14 +872,16 @@ html[data-theme="dark"] .icon-moon { display: block; }
   font-variant-numeric: tabular-nums;
 }
 
-/* ---------- 滚动淡入 ---------- */
-.reveal {
+/* ---------- 滚动淡入 ----------
+   仅在 JS 可用（<html> 带 .js 类）时才初始隐藏，
+   无 JS 或脚本加载失败时内容直接可见（渐进增强）。 */
+.js .reveal {
   opacity: 0;
   transform: translateY(18px);
   transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
 }
 
-.reveal.is-visible {
+.js .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
