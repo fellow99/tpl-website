@@ -6,6 +6,11 @@
   <meta name="description" content="tpl-workspace 多端业务应用框架 —— 一套骨架，贯通 Web / Android / HarmonyOS / 微信小程序 / 管理后台五端，统一工程结构、双后端服务、跨端设计系统与一键容器化部署。" />
   <title>tpl-workspace · 多端业务应用框架</title>
 
+  <!-- 资源基础路径：发布到 GitHub Pages 项目页（fellow99.github.io/tpl-website/）时，
+       使 style/ js/ images/ 等相对引用解析到 /tpl-website/ 子路径下。
+       本地/Docker 根路径部署时该标签无副作用（/ 即站点根）。 -->
+  <base href="/tpl-website/" />
+
   <!-- 首屏主题预置：同步读取 localStorage → 否则跟随系统，避免闪烁 -->
   <script>
     (function () {
