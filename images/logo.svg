@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img" aria-label="tpl-workspace logo">
+  <!-- 多端贯通：五个端节点 + 中心枢纽，体现「一套骨架，贯通五端」 -->
+  <g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <!-- 中心枢纽（框架核心） -->
+    <circle cx="24" cy="24" r="6.5" fill="currentColor" fill-opacity="0.14"/>
+    <circle cx="24" cy="24" r="6.5"/>
+    <!-- 五端连接辐条 -->
+    <line x1="24" y1="17.5" x2="24" y2="9"/>
+    <line x1="29.6" y1="22" x2="37" y2="19.5"/>
+    <line x1="27.5" y1="28.6" x2="31" y2="35.5"/>
+    <line x1="20.5" y1="28.6" x2="17" y2="35.5"/>
+    <line x1="18.4" y1="22" x2="11" y2="19.5"/>
+    <!-- 五端节点 -->
+    <circle cx="24" cy="8" r="3.4" fill="currentColor"/>
+    <circle cx="37.5" cy="19" r="3.4" fill="currentColor"/>
+    <circle cx="31.5" cy="36.5" r="3.4" fill="currentColor"/>
+    <circle cx="16.5" cy="36.5" r="3.4" fill="currentColor"/>
+    <circle cx="10.5" cy="19" r="3.4" fill="currentColor"/>
+  </g>
+</svg>

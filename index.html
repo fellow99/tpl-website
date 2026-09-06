@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="tpl-workspace 多端业务应用框架 —— 一套骨架，贯通 Web / Android / HarmonyOS / 微信小程序 / 管理后台五端，统一工程结构、双后端服务、跨端设计系统与一键容器化部署。" />
+  <title>tpl-workspace · 多端业务应用框架</title>
+
+  <!-- 首屏主题预置：同步读取 localStorage → 否则跟随系统，避免闪烁 -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('tpl-theme');
+        var theme = saved === 'light' || saved === 'dark'
+          ? saved
+          : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="style/main.css" />
+  <link rel="icon" type="image/svg+xml" href="images/logo.svg" />
+</head>
+<body>
+  <!-- ===================== 顶栏 ===================== -->
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="tpl-workspace 首页">
+        <span class="brand-logo" aria-hidden="true">
+          <img src="images/logo.svg" alt="" width="30" height="30" />
+        </span>
+        <span class="brand-name">tpl-workspace</span>
+      </a>
+
+      <nav class="main-nav" id="main-nav" aria-label="主导航">
+        <a href="#features" class="nav-link">特性</a>
+        <a href="#stack" class="nav-link">技术栈</a>
+        <a href="#architecture" class="nav-link">架构</a>
+        <a href="#quickstart" class="nav-link">快速开始</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="切换到暗色主题" title="切换主题">
+          <svg class="icon icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+            <g stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+              <line x1="12" y1="2.5" x2="12" y2="5"/>
+              <line x1="12" y1="19" x2="12" y2="21.5"/>
+              <line x1="2.5" y1="12" x2="5" y2="12"/>
+              <line x1="19" y1="12" x2="21.5" y2="12"/>
+              <line x1="5.2" y1="5.2" x2="6.9" y2="6.9"/>
+              <line x1="17.1" y1="17.1" x2="18.8" y2="18.8"/>
+              <line x1="18.8" y1="5.2" x2="17.1" y2="6.9"/>
+              <line x1="6.9" y1="17.1" x2="5.2" y2="18.8"/>
+            </g>
+          </svg>
+          <svg class="icon icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path d="M20 14.5A8 8 0 1 1 9.5 4a6.2 6.2 0 0 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <a href="#quickstart" class="btn btn-primary btn-sm header-cta">快速开始</a>
+      </div>
+
+      <button id="nav-toggle" class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="main-nav">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===================== Hero ===================== -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy reveal">
+          <span class="eyebrow">多端业务应用框架</span>
+          <h1 class="hero-title">一套骨架，<span class="accent">贯通五端</span></h1>
+          <p class="hero-sub">
+            Web · Android · HarmonyOS · 微信小程序 · 管理后台 ——
+            统一工程结构、双后端服务、跨端设计系统与一键容器化部署。
+          </p>
+          <div class="hero-cta">
+            <a href="#quickstart" class="btn btn-accent">立即上手</a>
+            <a href="#architecture" class="btn btn-ghost">查看架构</a>
+          </div>
+          <ul class="hero-badges" aria-label="覆盖终端">
+            <li>Web</li>
+            <li>Android</li>
+            <li>HarmonyOS</li>
+            <li>微信小程序</li>
+            <li>管理后台</li>
+          </ul>
+        </div>
+
+        <div class="hero-art reveal" aria-hidden="true">
+          <!-- 轻量架构示意：五端 → Nginx → 双后端 → 数据层 -->
+          <svg viewBox="0 0 460 285" role="img" aria-label="架构示意图">
+            <defs>
+              <linearGradient id="nodeGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="var(--color-primary)"/>
+                <stop offset="1" stop-color="var(--color-primary-strong)"/>
+              </linearGradient>
+            </defs>
+            <!-- 五端 -->
+            <g class="diagram-labels">
+              <text x="230" y="24" text-anchor="middle" class="d-title">客户端层</text>
+              <rect x="40" y="40" width="70" height="40" rx="9" class="d-node"/>
+              <rect x="125" y="40" width="70" height="40" rx="9" class="d-node"/>
+              <rect x="210" y="40" width="70" height="40" rx="9" class="d-node"/>
+              <rect x="295" y="40" width="70" height="40" rx="9" class="d-node"/>
+              <rect x="380" y="40" width="40" height="40" rx="9" class="d-node"/>
+              <text x="75" y="65" text-anchor="middle" class="d-text">Web</text>
+              <text x="160" y="65" text-anchor="middle" class="d-text">安卓</text>
+              <text x="245" y="65" text-anchor="middle" class="d-text">鸿蒙</text>
+              <text x="330" y="65" text-anchor="middle" class="d-text">小程序</text>
+              <text x="400" y="65" text-anchor="middle" class="d-text">管理</text>
+            </g>
+            <!-- 汇聚线 -->
+            <path d="M75 80 L230 130 M160 80 L230 130 M245 80 L230 130 M330 80 L230 130 M400 80 L230 130" class="d-flow"/>
+            <!-- Nginx 网关 -->
+            <rect x="150" y="135" width="160" height="46" rx="10" class="d-gateway"/>
+            <text x="230" y="164" text-anchor="middle" class="d-text-strong">Nginx 网关 :38088</text>
+            <!-- 双后端 -->
+            <path d="M200 181 L120 220 M260 181 L340 220" class="d-flow"/>
+            <rect x="50" y="225" width="140" height="46" rx="10" class="d-service"/>
+            <text x="120" y="245" text-anchor="middle" class="d-text-strong">tpl-app-api</text>
+            <text x="120" y="261" text-anchor="middle" class="d-text-sub">用户端 Spring Boot 4.1</text>
+            <rect x="270" y="225" width="140" height="46" rx="10" class="d-service"/>
+            <text x="340" y="245" text-anchor="middle" class="d-text-strong">tpl-manage</text>
+            <text x="340" y="261" text-anchor="middle" class="d-text-sub">管理端 RuoYi-Plus</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 核心特性 ===================== -->
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">核心特性</span>
+          <h2 class="section-title">为什么选择 tpl-workspace</h2>
+          <p class="section-desc">不绑定业务领域，沉淀多端通用能力。接入业务即可快速产出覆盖五端的完整产品。</p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="card feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2.5" y="4" width="13" height="10" rx="2"/><rect x="17" y="8" width="4.5" height="11" rx="1.2"/><line x1="6" y1="18.5" x2="12" y2="18.5"/>
+              </svg>
+            </div>
+            <h3>多端覆盖</h3>
+            <p>用户端 Web / Android / HarmonyOS / 微信小程序，加 Web 管理后台，一套架构贯穿五端。</p>
+          </article>
+
+          <article class="card feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="8" height="16" rx="2"/><rect x="13" y="4" width="8" height="16" rx="2"/><line x1="6" y1="8" x2="8" y2="8"/><line x1="16" y1="8" x2="18" y2="8"/>
+              </svg>
+            </div>
+            <h3>双后端服务</h3>
+            <p>用户端 API（独立 Spring Boot 4.1）+ 管理端（RuoYi-Vue-Plus），职责清晰、可独立演进。</p>
+          </article>
+
+          <article class="card feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18"/><path d="M3 12h18"/>
+              </svg>
+            </div>
+            <h3>统一设计系统</h3>
+            <p>一套 Design Tokens（色彩 / 字体 / 间距）跨端复用，保证多端视觉一致，避免视觉漂移。</p>
+          </article>
+
+          <article class="card feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"/><path d="M3.5 12h17M12 3.5c2.6 2.6 2.6 14.4 0 17M12 3.5c-2.6 2.6-2.6 14.4 0 17"/>
+              </svg>
+            </div>
+            <h3>国际化</h3>
+            <p>三语言（zh-CN / en-US / zh-TW）语料单一事实源，脚本自动同步到各端。</p>
+          </article>
+
+          <article class="card feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 14.5A8 8 0 1 1 9.5 4a6.2 6.2 0 0 0 10.5 10.5Z"/><circle cx="17" cy="7" r="1.2" fill="currentColor" stroke="none"/>
+              </svg>
+            </div>
+            <h3>主题支持</h3>
+            <p>light / dark / system 三态主题，深浅色皮肤联动，尊重系统偏好。</p>
+          </article>
+
+          <article class="card feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 14a4 4 0 0 1 .5-8 5 5 0 0 1 9.6-1A4.5 4.5 0 0 1 18 14"/><path d="M8 18l2-2 2 2 2-2 2 2"/><line x1="7" y1="21" x2="15" y2="21"/>
+              </svg>
+            </div>
+            <h3>部署编排</h3>
+            <p>Docker Compose 一键编排 PostgreSQL / Redis / 双后端 / 前端 / Nginx 网关。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 技术栈 ===================== -->
+    <section class="section section-alt" id="stack">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">技术栈</span>
+          <h2 class="section-title">每一端，都用主流技术</h2>
+          <p class="section-desc">跨端技术选型清晰、可维护，团队无需在多套体系间反复切换。</p>
+        </div>
+
+        <div class="stack-list reveal">
+          <div class="stack-row">
+            <span class="stack-label">用户端 Web</span>
+            <span class="stack-tags"><span class="tag">Vue 3</span><span class="tag">TypeScript</span><span class="tag">Vite</span><span class="tag">纯 CSS 设计系统</span></span>
+          </div>
+          <div class="stack-row">
+            <span class="stack-label">管理端 Web</span>
+            <span class="stack-tags"><span class="tag">RuoYi-Vue-Plus-UI</span><span class="tag">Vue 3</span><span class="tag">Element Plus</span></span>
+          </div>
+          <div class="stack-row">
+            <span class="stack-label">用户端后端</span>
+            <span class="stack-tags"><span class="tag">Spring Boot 4.1</span><span class="tag">JDK 21</span><span class="tag">Sa-Token</span><span class="tag">MyBatis-Plus</span></span>
+          </div>
+          <div class="stack-row">
+            <span class="stack-label">管理端后端</span>
+            <span class="stack-tags"><span class="tag">RuoYi-Vue-Plus 6.0</span><span class="tag">Spring Boot</span><span class="tag">JDK 21</span></span>
+          </div>
+          <div class="stack-row">
+            <span class="stack-label">Android</span>
+            <span class="stack-tags"><span class="tag">Kotlin</span><span class="tag">Jetpack</span><span class="tag">Material 3</span></span>
+          </div>
+          <div class="stack-row">
+            <span class="stack-label">HarmonyOS</span>
+            <span class="stack-tags"><span class="tag">ArkTS</span><span class="tag">ArkUI</span><span class="tag">Stage 模型</span></span>
+          </div>
+          <div class="stack-row">
+            <span class="stack-label">微信小程序</span>
+            <span class="stack-tags"><span class="tag">TypeScript</span><span class="tag">Skyline 渲染</span><span class="tag">glass-easel</span></span>
+          </div>
+          <div class="stack-row">
+            <span class="stack-label">数据 / 存储</span>
+            <span class="stack-tags"><span class="tag">PostgreSQL</span><span class="tag">Redis</span><span class="tag">MinIO</span></span>
+          </div>
+          <div class="stack-row">
+            <span class="stack-label">部署</span>
+            <span class="stack-tags"><span class="tag">Docker Compose</span><span class="tag">Nginx 网关</span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 系统架构 ===================== -->
+    <section class="section" id="architecture">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">系统架构</span>
+          <h2 class="section-title">清晰的请求与数据流</h2>
+          <p class="section-desc">各端客户端经 Nginx 网关路由 → 用户端请求进入 tpl-app-api，管理端请求进入 tpl-manage → 统一持久化到 PostgreSQL / Redis / MinIO。</p>
+        </div>
+
+        <div class="arch-flow reveal">
+          <div class="arch-col">
+            <span class="arch-col-title">客户端层</span>
+            <div class="arch-chips">
+              <span class="chip">tpl-app-web</span>
+              <span class="chip">tpl-app-android</span>
+              <span class="chip">tpl-app-harmony</span>
+              <span class="chip">tpl-app-mini</span>
+              <span class="chip">tpl-manage-ui</span>
+            </div>
+          </div>
+          <div class="arch-arrow" aria-hidden="true">↓</div>
+          <div class="arch-col">
+            <span class="arch-col-title">Nginx 网关 :38088</span>
+            <div class="arch-chips">
+              <span class="chip chip-accent">/web/ → 用户端</span>
+              <span class="chip chip-accent">/manage/ → 管理端</span>
+              <span class="chip chip-accent">/api/ → 用户端 API</span>
+            </div>
+          </div>
+          <div class="arch-arrow" aria-hidden="true">↓</div>
+          <div class="arch-col">
+            <span class="arch-col-title">双后端服务</span>
+            <div class="arch-chips">
+              <span class="chip chip-service">tpl-app-api · 用户端 API</span>
+              <span class="chip chip-service">tpl-manage · 管理后台</span>
+            </div>
+          </div>
+          <div class="arch-arrow" aria-hidden="true">↓</div>
+          <div class="arch-col">
+            <span class="arch-col-title">数据层</span>
+            <div class="arch-chips">
+              <span class="chip chip-data">PostgreSQL</span>
+              <span class="chip chip-data">Redis</span>
+              <span class="chip chip-data">MinIO</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 快速开始 ===================== -->
+    <section class="section section-alt" id="quickstart">
+      <div class="container container-narrow">
+        <div class="section-head reveal">
+          <span class="eyebrow">快速开始</span>
+          <h2 class="section-title">三步跑起来</h2>
+          <p class="section-desc">克隆仓库 → 一键启动全套服务 → 访问。</p>
+        </div>
+
+        <ol class="steps reveal">
+          <li class="step">
+            <span class="step-num">1</span>
+            <div class="step-body">
+              <p class="step-desc">克隆仓库（含子模块）</p>
+              <div class="code-block">
+                <button class="code-copy" type="button" data-copy="git clone --recurse-submodules &lt;repo-url&gt; &amp;&amp; cd tpl-workspace" aria-label="复制命令">复制</button>
+                <pre><code>git clone --recurse-submodules &lt;repo-url&gt; &amp;&amp; cd tpl-workspace</code></pre>
+              </div>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step-num">2</span>
+            <div class="step-body">
+              <p class="step-desc">一键启动全套服务（数据库 / 缓存 / 双后端 / 前端 / 网关）</p>
+              <div class="code-block">
+                <button class="code-copy" type="button" data-copy="docker compose -f deploy/docker-compose.yml up -d --build" aria-label="复制命令">复制</button>
+                <pre><code>docker compose -f deploy/docker-compose.yml up -d --build</code></pre>
+              </div>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step-num">3</span>
+            <div class="step-body">
+              <p class="step-desc">访问各端</p>
+              <div class="code-block">
+                <button class="code-copy" type="button" data-copy="# 用户端 Web：  http://localhost:38088/web/" aria-label="复制命令">复制</button>
+                <pre><code># 用户端 Web：  http://localhost:38088/web/
+# 管理后台：    http://localhost:38088/manage/</code></pre>
+              </div>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== 页脚 ===================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="brand-logo" aria-hidden="true">
+          <img src="images/logo.svg" alt="" width="28" height="28" />
+        </span>
+        <span class="footer-name">tpl-workspace</span>
+        <p class="footer-tag">多端业务应用框架 · 一套骨架，贯通五端</p>
+      </div>
+
+      <nav class="footer-links" aria-label="页脚导航">
+        <a href="#features">核心特性</a>
+        <a href="#stack">技术栈</a>
+        <a href="#architecture">系统架构</a>
+        <a href="#quickstart">快速开始</a>
+      </nav>
+    </div>
+    <div class="container footer-bottom">
+      <span>Proprietary · All rights reserved</span>
+      <span class="footer-tech">Spring Boot 4.1 · Vue 3 · PostgreSQL · Redis · HarmonyOS</span>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
